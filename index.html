@@ -257,29 +257,115 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            min-height: 600px;
+            min-height: 500px;
             overflow-x: auto;
             overflow-y: hidden;
             background: #fafafa;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
+            padding: 20px;
         }
         .mermaid svg {
             max-width: 100%;
             height: auto;
-            min-width: 800px;
+            min-width: 100%;
         }
         .mermaid a {
             color: #1976d2;
             text-decoration: underline;
             font-size: 10px;
         }
+        
+        /* Responsive improvements */
+        @media (max-width: 1200px) {
+            .mermaid {
+                min-height: 450px;
+                padding: 15px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .mermaid {
-                min-height: 400px;
+                min-height: 350px;
+                padding: 10px;
+                overflow-x: scroll;
             }
             .mermaid svg {
-                min-width: 600px;
+                min-width: 320px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mermaid {
+                min-height: 300px;
+                padding: 8px;
+            }
+            .mermaid svg {
+                min-width: 280px;
+                font-size: 10px;
+            }
+        }
+        
+        /* Additional responsive improvements */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+                border-radius: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .tab-button {
+                text-align: center;
+                margin-right: 0;
+                border-radius: 8px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .domain-grid {
+                grid-template-columns: 1fr;
+            }
+            .section {
+                padding: 15px;
+            }
+            .diagram-container {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+                padding-bottom: 15px;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            h3 {
+                font-size: 1.2em;
+            }
+            .section {
+                padding: 12px;
+                margin: 15px 0;
+            }
+            .feature-card, .domain-card {
+                padding: 15px;
+            }
+            .tab-button {
+                padding: 12px 20px;
+                font-size: 14px;
             }
         }
     </style>
@@ -290,120 +376,13 @@
         
         <!-- Tab Navigation -->
         <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'database-design')">🗄️ Database Design</button>
-            <button class="tab-button" onclick="openTab(event, 'feature-design')">🎯 Feature Design</button>
+            <button class="tab-button active" onclick="openTab(event, 'feature-design')">🎯 Feature Design</button>
+            <button class="tab-button" onclick="openTab(event, 'database-design')">🗄️ Database Design</button>
         </div>
 
         <!-- Database Design Tab -->
-        <div id="database-design" class="tab-content active">
-            <div class="alert alert-info">
-                <strong>📅 Last Updated:</strong> August 2025<br>
-                <strong>🎯 Purpose:</strong> Complete system redesign from microservices to monolithic architecture with new features<br>
-                <strong>📊 Status:</strong> Design Phase Complete, Ready for Implementation
-            </div>
-
-            <h2>📌 Executive Summary</h2>
-            <div class="section">
-                <p><strong>HarbourX</strong> is a comprehensive financial services platform for broker commission management, loan processing, and client engagement. This document outlines the complete system redesign, migrating from an over-engineered microservices architecture to a streamlined monolithic application.</p>
-                
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>🎯 Key Objectives</h3>
-                        <ul>
-                            <li>Eliminate data duplication</li>
-                            <li>Reduce infrastructure costs by 80%</li>
-                            <li>Improve system performance</li>
-                            <li>Add modern features</li>
-                            <li>Enhance user experience</li>
-                        </ul>
-                    </div>
-                    <div class="feature-card">
-                        <h3>⚡ Core Features</h3>
-                        <ul>
-                            <li>Kanban loan management</li>
-                            <li>Client self-service portal</li>
-                            <li>Referral system</li>
-                            <li>AI-powered risk assessment</li>
-                            <li>Digital signatures</li>
-                        </ul>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🔧 Technical Improvements</h3>
-                        <ul>
-                            <li>Single database (PostgreSQL)</li>
-                            <li>Simplified deployment</li>
-                            <li>Built-in monitoring</li>
-                            <li>ACID transactions</li>
-                            <li>60% less code</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <h2>🏗️ System Architecture</h2>
-            <div class="section">
-                <div class="mermaid">
-flowchart TB
-    subgraph "Client Layer"
-        WEB[Web Browser]
-        MOB[Mobile Browser]
-        API[External APIs]
-    end
-    
-    subgraph "Application Layer"
-        APP[HarbourX Monolith]
-        
-        subgraph "Core Modules"
-            AUTH[Authentication]
-            USER[User Management]
-            LOAN[Loan Processing]
-            COMM[Commissions]
-            PORT[Client Portal]
-        end
-        
-        subgraph "New Features"
-            KAN[Kanban Board]
-            REF[Referral System]
-            AI[AI/ML Engine]
-            DOC[Document Manager]
-            SIGN[Digital Signatures]
-        end
-    end
-    
-    subgraph "Data Layer"
-        PG[(PostgreSQL)]
-        REDIS[(Redis Cache)]
-        S3[Object Storage]
-    end
-    
-    subgraph "External Services"
-        LEND[Lender APIs]
-        CREDIT[Credit Check]
-        KYC[Identity Verification]
-        EMAIL[Email Service]
-        SMS[SMS Gateway]
-    end
-    
-    WEB --> APP
-    MOB --> APP
-    API --> APP
-    
-    APP --> PG
-    APP --> REDIS
-    APP --> S3
-    
-    APP --> LEND
-    APP --> CREDIT
-    APP --> KYC
-    APP --> EMAIL
-    APP --> SMS
-    
-    style APP fill:#667eea,color:#fff
-    style PG fill:#336791,color:#fff
-    style REDIS fill:#dc382d,color:#fff
-                </div>
-            </div>
-
+        <div id="database-design" class="tab-content">
+            
             <h2>💾 Database Schema - Complete Design</h2>
             <div class="section">
                 <h3>Core User & Identity System</h3>
@@ -778,239 +757,648 @@ flowchart TB
                         </ul>
                     </div>
                 </div>
+
+                <h3>Client Information Collection System (NEW)</h3>
+                <div class="feature-grid">
+                    <div class="database-table">
+                        <h4>clients</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>broker_id: INT REFERENCES users</li>
+                            <li>first_name: VARCHAR</li>
+                            <li>last_name: VARCHAR</li>
+                            <li>email: VARCHAR</li>
+                            <li>phone: VARCHAR</li>
+                            <li>date_of_birth: DATE</li>
+                            <li>marital_status: VARCHAR</li>
+                            <li>number_of_dependents: INT</li>
+                            <li>employment_status: VARCHAR</li>
+                            <li>current_stage: VARCHAR</li>
+                            <li>personal_info: JSONB</li>
+                            <li>preferences: JSONB</li>
+                            <li>portal_access_token: VARCHAR</li>
+                            <li>portal_last_accessed: TIMESTAMP</li>
+                            <li>created_at: TIMESTAMP</li>
+                            <li>updated_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>client_income</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>income_type: VARCHAR</li>
+                            <li>employer_name: VARCHAR</li>
+                            <li>annual_salary: DECIMAL</li>
+                            <li>monthly_salary: DECIMAL</li>
+                            <li>bonus_income: DECIMAL</li>
+                            <li>overtime_income: DECIMAL</li>
+                            <li>other_income: DECIMAL</li>
+                            <li>employment_start_date: DATE</li>
+                            <li>payslip_documents: JSONB</li>
+                            <li>ai_extracted_data: JSONB</li>
+                            <li>ai_confidence_score: DECIMAL</li>
+                            <li>manual_verification: BOOLEAN</li>
+                            <li>created_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>client_assets</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>asset_type: VARCHAR</li>
+                            <li>asset_description: VARCHAR</li>
+                            <li>estimated_value: DECIMAL</li>
+                            <li>ownership_percentage: DECIMAL</li>
+                            <li>property_address: VARCHAR</li>
+                            <li>vehicle_details: JSONB</li>
+                            <li>bank_account_details: JSONB</li>
+                            <li>investment_details: JSONB</li>
+                            <li>supporting_documents: JSONB</li>
+                            <li>ai_extracted_value: DECIMAL</li>
+                            <li>ai_confidence_score: DECIMAL</li>
+                            <li>valuation_source: VARCHAR</li>
+                            <li>created_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>client_liabilities</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>liability_type: VARCHAR</li>
+                            <li>lender_name: VARCHAR</li>
+                            <li>current_balance: DECIMAL</li>
+                            <li>monthly_payment: DECIMAL</li>
+                            <li>interest_rate: DECIMAL</li>
+                            <li>loan_term_remaining: INT</li>
+                            <li>credit_limit: DECIMAL</li>
+                            <li>account_number: VARCHAR</li>
+                            <li>liability_details: JSONB</li>
+                            <li>ai_extracted_data: JSONB</li>
+                            <li>ai_confidence_score: DECIMAL</li>
+                            <li>supporting_documents: JSONB</li>
+                            <li>created_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Document Processing & AI System (NEW)</h3>
+                <div class="feature-grid">
+                    <div class="database-table">
+                        <h4>uploaded_documents</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>document_type: VARCHAR</li>
+                            <li>document_category: VARCHAR</li>
+                            <li>original_filename: VARCHAR</li>
+                            <li>s3_file_path: VARCHAR</li>
+                            <li>file_size: BIGINT</li>
+                            <li>mime_type: VARCHAR</li>
+                            <li>ai_processing_status: VARCHAR</li>
+                            <li>ai_processing_started_at: TIMESTAMP</li>
+                            <li>ai_processing_completed_at: TIMESTAMP</li>
+                            <li>ai_extracted_text: TEXT</li>
+                            <li>ai_structured_data: JSONB</li>
+                            <li>ai_confidence_scores: JSONB</li>
+                            <li>manual_review_required: BOOLEAN</li>
+                            <li>manual_review_completed: BOOLEAN</li>
+                            <li>created_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>ai_processing_logs</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>document_id: INT REFERENCES uploaded_documents</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>processing_type: VARCHAR</li>
+                            <li>ai_model_version: VARCHAR</li>
+                            <li>processing_started_at: TIMESTAMP</li>
+                            <li>processing_completed_at: TIMESTAMP</li>
+                            <li>extraction_results: JSONB</li>
+                            <li>confidence_metrics: JSONB</li>
+                            <li>errors_encountered: JSONB</li>
+                            <li>processing_duration_ms: INT</li>
+                            <li>success: BOOLEAN</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>factfind_templates</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>template_name: VARCHAR</li>
+                            <li>template_version: VARCHAR</li>
+                            <li>template_structure: JSONB</li>
+                            <li>field_mappings: JSONB</li>
+                            <li>validation_rules: JSONB</li>
+                            <li>compliance_requirements: JSONB</li>
+                            <li>is_active: BOOLEAN</li>
+                            <li>created_by: INT REFERENCES users</li>
+                            <li>created_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>client_factfinds</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>template_id: INT REFERENCES factfind_templates</li>
+                            <li>ai_generated_data: JSONB</li>
+                            <li>client_completed_data: JSONB</li>
+                            <li>broker_reviewed_data: JSONB</li>
+                            <li>final_factfind: JSONB</li>
+                            <li>completion_percentage: DECIMAL</li>
+                            <li>ai_confidence_overall: DECIMAL</li>
+                            <li>requires_manual_review: BOOLEAN</li>
+                            <li>broker_approved: BOOLEAN</li>
+                            <li>client_signed_off: BOOLEAN</li>
+                            <li>generated_at: TIMESTAMP</li>
+                            <li>finalized_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Third-Party Integration System (NEW)</h3>
+                <div class="feature-grid">
+                    <div class="database-table">
+                        <h4>quickli_submissions</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>factfind_id: INT REFERENCES client_factfinds</li>
+                            <li>submission_data: JSONB</li>
+                            <li>quickli_submission_id: VARCHAR</li>
+                            <li>submitted_at: TIMESTAMP</li>
+                            <li>response_received_at: TIMESTAMP</li>
+                            <li>lender_recommendations: JSONB</li>
+                            <li>rate_comparisons: JSONB</li>
+                            <li>best_recommendations: JSONB</li>
+                            <li>broker_selected_products: JSONB</li>
+                            <li>client_approved_products: JSONB</li>
+                            <li>status: VARCHAR</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>applyonline_applications</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>quickli_submission_id: INT REFERENCES quickli_submissions</li>
+                            <li>selected_lender: VARCHAR</li>
+                            <li>selected_product: JSONB</li>
+                            <li>application_package: JSONB</li>
+                            <li>applyonline_app_id: VARCHAR</li>
+                            <li>submitted_at: TIMESTAMP</li>
+                            <li>current_status: VARCHAR</li>
+                            <li>lender_response: JSONB</li>
+                            <li>conditional_approval: JSONB</li>
+                            <li>final_approval: JSONB</li>
+                            <li>settlement_date: DATE</li>
+                            <li>commission_triggered: BOOLEAN</li>
+                            <li>commission_processed_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>integration_logs</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>integration_type: VARCHAR</li>
+                            <li>external_system: VARCHAR</li>
+                            <li>request_data: JSONB</li>
+                            <li>response_data: JSONB</li>
+                            <li>request_timestamp: TIMESTAMP</li>
+                            <li>response_timestamp: TIMESTAMP</li>
+                            <li>http_status_code: INT</li>
+                            <li>success: BOOLEAN</li>
+                            <li>error_message: TEXT</li>
+                            <li>retry_count: INT</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Enhanced Kanban Workflow System (UPDATED)</h3>
+                <div class="feature-grid">
+                    <div class="database-table">
+                        <h4>kanban_stages</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>stage_name: VARCHAR</li>
+                            <li>stage_order: INT</li>
+                            <li>stage_color: VARCHAR</li>
+                            <li>description: TEXT</li>
+                            <li>required_actions: JSONB</li>
+                            <li>auto_progression_rules: JSONB</li>
+                            <li>sla_hours: INT</li>
+                            <li>notification_triggers: JSONB</li>
+                            <li>is_active: BOOLEAN</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>client_stage_history</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>from_stage: VARCHAR</li>
+                            <li>to_stage: VARCHAR</li>
+                            <li>moved_by: INT REFERENCES users</li>
+                            <li>moved_at: TIMESTAMP</li>
+                            <li>duration_in_previous_stage_hours: INT</li>
+                            <li>completion_percentage: DECIMAL</li>
+                            <li>notes: TEXT</li>
+                            <li>automated_move: BOOLEAN</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="database-table">
+                        <h4>client_tasks</h4>
+                        <ul class="field-list">
+                            <li>id: SERIAL PRIMARY KEY</li>
+                            <li>client_id: INT REFERENCES clients</li>
+                            <li>task_type: VARCHAR</li>
+                            <li>task_description: TEXT</li>
+                            <li>assigned_to: INT REFERENCES users</li>
+                            <li>priority: INT</li>
+                            <li>due_date: TIMESTAMP</li>
+                            <li>status: VARCHAR</li>
+                            <li>completion_notes: TEXT</li>
+                            <li>completed_by: INT REFERENCES users</li>
+                            <li>completed_at: TIMESTAMP</li>
+                            <li>created_at: TIMESTAMP</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <h2>🚀 Technology Stack</h2>
-            <div class="section">
-                <h3>Backend Technologies</h3>
-                <div class="tech-stack">
-                    <span class="tech-badge">Go (Golang)</span>
-                    <span class="tech-badge">Java Spring Boot</span>
-                    <span class="tech-badge">Gin/Echo Framework</span>
-                    <span class="tech-badge">Spring Security</span>
-                    <span class="tech-badge">GORM / JPA</span>
-                    <span class="tech-badge">JWT Auth</span>
-                    <span class="tech-badge">gRPC</span>
-                    <span class="tech-badge">REST APIs</span>
-                </div>
-
-                <h3>Frontend Technologies</h3>
-                <div class="tech-stack">
-                    <span class="tech-badge">React 18</span>
-                    <span class="tech-badge">TypeScript</span>
-                    <span class="tech-badge">Material UI / Ant Design</span>
-                    <span class="tech-badge">Redux Toolkit</span>
-                    <span class="tech-badge">React Query</span>
-                    <span class="tech-badge">React Hook Form</span>
-                    <span class="tech-badge">React DnD (Kanban)</span>
-                    <span class="tech-badge">Vite</span>
-                </div>
-
-                <h3>Data Storage</h3>
-                <div class="tech-stack">
-                    <span class="tech-badge">PostgreSQL (Primary)</span>
-                    <span class="tech-badge">MongoDB (Documents)</span>
-                    <span class="tech-badge">AWS S3 (Files)</span>
-                    <span class="tech-badge">Redis (Cache)</span>
-                    <span class="tech-badge">ElasticSearch (Search)</span>
-                </div>
-
-                <h3>AI/Automation & Integrations</h3>
-                <div class="tech-stack">
-                    <span class="tech-badge">n8n (Workflow Automation)</span>
-                    <span class="tech-badge">OpenAI API</span>
-                    <span class="tech-badge">LangChain</span>
-                    <span class="tech-badge">Webhook.site</span>
-                    <span class="tech-badge">SendGrid</span>
-                    <span class="tech-badge">Twilio</span>
-                    <span class="tech-badge">DocuSign API</span>
-                </div>
-
-                <h3>DevOps & Monitoring</h3>
-                <div class="tech-stack">
-                    <span class="tech-badge">Docker</span>
-                    <span class="tech-badge">Kubernetes (Optional)</span>
-                    <span class="tech-badge">GitHub Actions</span>
-                    <span class="tech-badge">Grafana</span>
-                    <span class="tech-badge">Prometheus</span>
-                    <span class="tech-badge">ELK Stack</span>
-                    <span class="tech-badge">Nginx</span>
-                    <span class="tech-badge">Traefik</span>
-                </div>
-            </div>
-
-            <h2>🗺️ Implementation Roadmap</h2>
-            <div class="section">
-                <div class="alert alert-success">
-                    <h3>🎯 Milestone 1: Core Business Features (Priority)</h3>
-                    <strong>Focus:</strong> Commission Processing + File Upload + Kanban Board<br>
-                    <strong>Timeline:</strong> 16-18 weeks<br>
-                    <strong>Deliverable:</strong> Working system for commission management with visual workflow
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>Phase 1.1: Foundation Setup <span class="status-badge status-in-progress">3-4 weeks</span></h3>
-                        <ul>
-                            <li>Database setup (PostgreSQL + MongoDB)</li>
-                            <li>Go/Spring Boot project structure</li>
-                            <li>Basic authentication system</li>
-                            <li>AWS S3 configuration for file storage</li>
-                            <li>React project setup with TypeScript</li>
-                        </ul>
-                        <p><em>Deliverable: Basic infrastructure ready</em></p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h3>Phase 1.2: Commission System Backend <span class="status-badge status-pending">4-5 weeks</span></h3>
-                        <ul>
-                            <li>Commission models & fee structures (1 week)</li>
-                            <li>Upfront commission calculations (1 week)</li>
-                            <li>Trail commission processing (1 week)</li>
-                            <li>RCTI generation logic (1 week)</li>
-                            <li>Commission splitting & broker hierarchies (1 week)</li>
-                        </ul>
-                        <p><em>Deliverable: Complete commission API endpoints</em></p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h3>Phase 1.3: File Upload & Processing <span class="status-badge status-pending">3-4 weeks</span></h3>
-                        <ul>
-                            <li>Excel/CSV parser implementation (1 week)</li>
-                            <li>S3 integration for file storage (0.5 weeks)</li>
-                            <li>Bulk commission import logic (1.5 weeks)</li>
-                            <li>File validation & error handling (1 week)</li>
-                        </ul>
-                        <p><em>Deliverable: Working file upload with commission import</em></p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h3>Phase 1.4: Kanban Board Implementation <span class="status-badge status-pending">4-5 weeks</span></h3>
-                        <ul>
-                            <li>Kanban UI with React DnD (1.5 weeks)</li>
-                            <li>Workflow stages configuration (1 week)</li>
-                            <li>Loan status management (1 week)</li>
-                            <li>Real-time updates with WebSocket (1 week)</li>
-                            <li>Task assignments & notifications (0.5 weeks)</li>
-                        </ul>
-                        <p><em>Deliverable: Visual loan pipeline management</em></p>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Feature Design Tab -->
-        <div id="feature-design" class="tab-content">
-            <div class="summary-box">
-                <h3>🎯 Architecture Overview</h3>
-                <p>This unified schema combines:</p>
-                <ul>
-                    <li><strong>User & Access Management:</strong> Users, roles, permissions, and relationships</li>
-                    <li><strong>Business Domain:</strong> Companies, loans, commissions, RCTI, and file processing</li>
-                    <li><strong>Key Innovation:</strong> Brokers are users with roles, companies are flexible entities</li>
-                </ul>
+        <div id="feature-design" class="tab-content active">
+            <div class="alert alert-info">
+                <strong>📅 Last Updated:</strong> August 2025<br>
+                <strong>🎯 Purpose:</strong> Complete system redesign from microservices to monolithic architecture with new features<br>
+                <strong>📊 Status:</strong> Requirement Analysis Phase
+            </div>
+
+            <h2>📌 Executive Summary</h2>
+            <div class="section">
+                <p><strong>HarbourX</strong> is a comprehensive client-centric financial services platform that revolutionizes how brokers collect, process, and manage client information for loan applications. The system combines intelligent document processing, AI-powered data extraction, and seamless integration with industry-leading platforms like Quickli and ApplyOnline to streamline the entire loan origination process.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🎯 Key Objectives</h3>
+                        <ul>
+                            <li>Streamline client information collection</li>
+                            <li>Automate document processing with AI</li>
+                            <li>Integrate with Quickli (40+ lenders)</li>
+                            <li>Seamless ApplyOnline integration</li>
+                            <li>Reduce manual data entry by 90%</li>
+                            <li>Enhance broker productivity</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Core Workflow</h3>
+                        <ul>
+                            <li>Client-centric Kanban board</li>
+                            <li>AI document analysis & extraction</li>
+                            <li>Auto-generated Factfind templates</li>
+                            <li>Client portal for missing info</li>
+                            <li>Quickli integration for loan comparison</li>
+                            <li>ApplyOnline application submission</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤖 AI-Powered Features</h3>
+                        <ul>
+                            <li>Payslip income extraction</li>
+                            <li>Asset valuation from documents</li>
+                            <li>Liability assessment</li>
+                            <li>OCR document processing</li>
+                            <li>Auto-fill client information</li>
+                            <li>Compliance validation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>🏗️ System Architecture</h2>
+            <div class="section">
+                <div class="mermaid">
+flowchart TB
+    subgraph "Client Layer"
+        WEB[Web Browser]
+        MOB[Mobile Browser]
+        API[External APIs]
+    end
+    
+    subgraph "Application Layer"
+        APP[HarbourX Monolith]
+        
+        subgraph "Core Modules"
+            AUTH[Authentication]
+            USER[User Management]
+            LOAN[Loan Processing]
+            COMM[Commissions]
+            PORT[Client Portal]
+        end
+        
+        subgraph "New Features"
+            KAN[Kanban Board]
+            REF[Referral System]
+            AI[AI/ML Engine]
+            DOC[Document Manager]
+            SIGN[Digital Signatures]
+        end
+    end
+    
+    subgraph "External Services"
+        QUICKLI[Quickli Platform]
+        APPLYONLINE[ApplyOnline]
+        LEND[Lender APIs]
+        CREDIT[Credit Check]
+        KYC[Identity Verification]
+        EMAIL[Email Service]
+        SMS[SMS Gateway]
+    end
+    
+    subgraph "Data Layer"
+        PG[(PostgreSQL)]
+        REDIS[(Redis Cache)]
+        S3[Object Storage]
+    end
+    
+    WEB --> APP
+    MOB --> APP
+    API --> APP
+    
+    APP --> PG
+    APP --> REDIS
+    APP --> S3
+    
+    APP --> QUICKLI
+    APP --> APPLYONLINE
+    APP --> LEND
+    APP --> CREDIT
+    APP --> KYC
+    APP --> EMAIL
+    APP --> SMS
+    
+    style APP fill:#667eea,color:#fff
+    style PG fill:#336791,color:#fff
+    style REDIS fill:#dc382d,color:#fff
+                </div>
+            </div>
+
+            <h2>👤 User Journey Diagrams</h2>
+            <div class="section">
+                
+                <h3>🎯 Streamlined Broker Journey - Optimized Process</h3>
+                <div class="diagram-container">
+                    <div class="mermaid">
+graph LR
+    A[New Client<br/>Contact] --> B[Create Client Card<br/>& Send Portal Link]
+    B --> C[Client Portal<br/>Document Upload]
+    C --> D[AI Auto-Processing<br/>& Factfind Generation]
+    D --> E[Quickli Analysis<br/>40+ Lenders]
+    E --> F[Present & Approve<br/>Best Options]
+    F --> G[ApplyOnline<br/>Submission]
+    G --> H[Settlement &<br/>Commission]
+
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style D fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style E fill:#e8f5e8,stroke:#4caf50,stroke-width:3px
+    style G fill:#fff3e0,stroke:#ff9800,stroke-width:3px
+    style H fill:#e8f6f3,stroke:#16a085,stroke-width:3px
+                    </div>
+                </div>
+
+                <h3>📊 Simplified Client Kanban Flow</h3>
+                <div class="diagram-container">
+                    <div class="mermaid">
+flowchart LR
+    A[New Client] --> B[Document Upload<br/>& AI Processing]
+    B --> C[Factfind Generation<br/>& Review]
+    C --> D[Quickli Analysis<br/>& Approval]
+    D --> E[Application<br/>Submission]
+    E --> F[Settlement]
+
+    style A fill:#ffebee,stroke:#f44336,stroke-width:3px
+    style B fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    style C fill:#e1f5fe,stroke:#0288d1,stroke-width:3px
+    style D fill:#e8f5e8,stroke:#4caf50,stroke-width:3px
+    style E fill:#fff3e0,stroke:#ff9800,stroke-width:3px
+    style F fill:#e8f6f3,stroke:#16a085,stroke-width:3px
+                    </div>
+                </div>
+
+                <h3>🤖 AI Document Processing Workflow</h3>
+                <div class="diagram-container">
+                    <div class="mermaid">
+flowchart TD
+    START[Client Uploads Documents] --> UPLOAD[Document Storage<br/>in S3]
+    UPLOAD --> DETECT[Document Type<br/>Detection]
+    
+    DETECT --> PAYSLIP{Payslip?}
+    DETECT --> ASSET{Asset Doc?}
+    DETECT --> LIABILITY{Liability?}
+    
+    PAYSLIP -->|Yes| INCOME[Extract Income Data<br/>• Salary<br/>• Bonuses<br/>• Deductions]
+    ASSET -->|Yes| ASSETS[Extract Asset Info<br/>• Property Value<br/>• Vehicle Worth<br/>• Bank Balance]
+    LIABILITY -->|Yes| LIAB[Extract Liability Data<br/>• Loan Balance<br/>• Monthly Payment<br/>• Interest Rate]
+    
+    INCOME --> VALIDATE[Data Validation<br/>& Confidence Scoring]
+    ASSETS --> VALIDATE
+    LIAB --> VALIDATE
+    
+    VALIDATE --> FACTFIND[Auto-populate<br/>Factfind Template]
+    FACTFIND --> REVIEW[Broker Review<br/>& Approval]
+    
+    style START fill:#e3f2fd,stroke:#1976d2
+    style DETECT fill:#f3e5f5,stroke:#7b1fa2
+    style VALIDATE fill:#fff3e0,stroke:#ff9800
+    style FACTFIND fill:#e8f6f3,stroke:#16a085
+                    </div>
+                </div>
+
+                <h3>🔄 Third-Party Integration Flow</h3>
+                <div class="diagram-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant C as Client
+    participant H as HarbourX
+    participant Q as Quickli
+    participant A as ApplyOnline
+    participant L as Lender
+    
+    C->>H: Complete Information
+    H->>H: Generate Factfind
+    H->>Q: Send Client Data
+    Q->>Q: Analyze 40+ Lenders
+    Q->>H: Return Recommendations
+    H->>C: Present Options
+    C->>H: Approve Selection
+    H->>A: Submit Application
+    A->>L: Forward to Lender
+    L->>A: Application Status
+    A->>H: Status Updates
+    H->>C: Progress Notification
+    L->>A: Final Approval
+    A->>H: Settlement Trigger
+    H->>H: Process Commission
+                    </div>
+                </div>
+
+                <h3>👥 Client Portal User Experience</h3>
+                <div class="diagram-container">
+                    <div class="mermaid">
+journey
+    title Client Portal Experience
+    section Registration
+        Receive Portal Link: 5: Client
+        Create Account: 4: Client
+        Verify Identity: 4: Client
+    section Information Collection
+        View Dashboard: 5: Client
+        Upload Payslips: 4: Client
+        Upload Asset Docs: 4: Client
+        Upload Liability Docs: 4: Client
+        Get AI Feedback: 5: Client
+    section Gap Completion
+        Review Missing Info: 4: Client
+        Fill Personal Details: 3: Client
+        Add Marital Status: 3: Client
+        Submit Completion: 4: Client
+    section Review & Approval
+        View Loan Options: 5: Client
+        Compare Rates: 5: Client
+        Select Preferred: 4: Client
+        Approve Application: 5: Client
+    section Tracking
+        Monitor Progress: 5: Client
+        Receive Updates: 5: Client
+        Final Notification: 5: Client
+                    </div>
+                </div>
+
             </div>
 
             <div class="diagram-container">
                 <h2>🚀 System Features & Capabilities</h2>
                 
                 <div class="domain-grid">
-                    <div class="domain-card" style="border-top: 4px solid #e74c3c;">
-                        <h3>1. Microservices → Monolith</h3>
-                        <p><strong>Current:</strong> 11 separate services with duplicated data</p>
-                        <p><strong>New:</strong> Unified database with ACID transactions</p>
-                        <ul>
-                            <li>Single source of truth</li>
-                            <li>No data synchronization issues</li>
-                            <li>Simplified deployment</li>
-                            <li>Lower operational costs</li>
-                        </ul>
-                    </div>
-
-                    <div class="domain-card" style="border-top: 4px solid #9b59b6;">
-                        <h3>2. Referral System</h3>
-                        <p><strong>Flexible relationship management:</strong></p>
-                        <ul>
-                            <li>Referrer/Referee relationships</li>
-                            <li>Commission splitting rules</li>
-                            <li>Multi-party referrals</li>
-                            <li>Automated referral fees</li>
-                            <li>Track referral sources</li>
-                        </ul>
-                    </div>
-
                     <div class="domain-card" style="border-top: 4px solid #3498db;">
-                        <h3>3. Kanban Loan Management</h3>
-                        <p><strong>Visual pipeline management:</strong></p>
+                        <h3>1. Client-Centric Kanban System</h3>
+                        <p><strong>Core entity: Every client of current broker</strong></p>
                         <ul>
-                            <li>Drag-drop loan stages</li>
-                            <li>Custom workflow states</li>
-                            <li>Automated status updates</li>
-                            <li>Task assignments</li>
-                            <li>SLA tracking</li>
-                        </ul>
-                    </div>
-
-                    <div class="domain-card" style="border-top: 4px solid #2ecc71;">
-                        <h3>4. Client Portal</h3>
-                        <p><strong>For broker's clients to upload loan documents:</strong></p>
-                        <ul>
-                            <li>Original loan document uploads</li>
-                            <li>Digital signature (DocuSign style)</li>
-                            <li>Application status tracking</li>
-                            <li>Secure document submission</li>
-                            <li>Direct communication with broker</li>
-                        </ul>
-                    </div>
-
-                    <div class="domain-card" style="border-top: 4px solid #f39c12;">
-                        <h3>5. Commission Processing</h3>
-                        <p><strong>Automated calculations:</strong></p>
-                        <ul>
-                            <li>Upfront & trail commissions</li>
-                            <li>Complex split rules</li>
-                            <li>RCTI generation</li>
-                            <li>Fee deductions</li>
-                            <li>Bulk processing via Excel</li>
+                            <li>Client cards represent individuals, not loans</li>
+                            <li>11-stage workflow from new client to settlement</li>
+                            <li>Visual progress tracking for information collection</li>
+                            <li>Drag-drop client management</li>
+                            <li>Real-time status updates</li>
+                            <li>Automated stage progression based on completed tasks</li>
                         </ul>
                     </div>
 
                     <div class="domain-card" style="border-top: 4px solid #e67e22;">
-                        <h3>6. AI/ML Engine</h3>
-                        <p><strong>Intelligent automation & analysis:</strong></p>
+                        <h3>2. AI-Powered Document Processing</h3>
+                        <p><strong>Intelligent automation for all uploaded files:</strong></p>
                         <ul>
-                            <li><strong>AI Loan Summary:</strong> Auto-generate loan summaries from applications</li>
-                            <li><strong>Compliance File Generation:</strong> Create regulatory documents automatically</li>
-                            <li><strong>Best Interest Duty:</strong> Ensure compliance with regulatory requirements</li>
-                            <li><strong>Factfind Extraction:</strong> Extract client information from documents</li>
-                            <li><strong>Financial Report Analysis:</strong> Parse bank statements & financial docs</li>
-                            <li><strong>Pay Slip Analysis & Info Extraction:</strong> Extract income data automatically</li>
-                            <li><strong>Risk Assessment:</strong> AI-powered risk scoring & fraud detection</li>
-                            <li><strong>Document Classification:</strong> Auto-categorize uploaded documents</li>
+                            <li><strong>Payslip Analysis:</strong> Extract salary, bonuses, overtime, deductions</li>
+                            <li><strong>Asset Recognition:</strong> Property valuations, vehicle worth, savings accounts</li>
+                            <li><strong>Liability Assessment:</strong> Existing loans, credit card limits, commitments</li>
+                            <li><strong>OCR Processing:</strong> Convert all document types to structured data</li>
+                            <li><strong>Data Validation:</strong> Cross-reference and verify extracted information</li>
+                            <li><strong>Auto-fill Factfind:</strong> Populate comprehensive client profile</li>
                         </ul>
                     </div>
 
-                    <div class="domain-card" style="border-top: 4px solid #1abc9c;">
-                        <h3>7. API Integrations</h3>
-                        <p><strong>Third-party connections:</strong></p>
+                    <div class="domain-card" style="border-top: 4px solid #2ecc71;">
+                        <h3>3. Enhanced Client Portal</h3>
+                        <p><strong>Streamlined information collection interface:</strong></p>
                         <ul>
-                            <li>Lender APIs</li>
-                            <li>Credit check services</li>
-                            <li>Identity verification</li>
-                            <li>Property valuation</li>
-                            <li>Banking data feeds</li>
+                            <li>Personal info collection (basic details)</li>
+                            <li>Income document upload (payslips, tax returns)</li>
+                            <li>Asset documentation (property, vehicles, savings)</li>
+                            <li>Liability statements (existing loans, credit cards)</li>
+                            <li>Gap completion for non-extractable data (marital status, preferences)</li>
+                            <li>Real-time AI processing feedback</li>
                         </ul>
                     </div>
 
-                    <div class="domain-card" style="border-top: 4px solid #34495e;">
-                        <h3>8. Future Extensibility</h3>
-                        <p><strong>Built for growth:</strong></p>
+                    <div class="domain-card" style="border-top: 4px solid #4caf50;">
+                        <h3>4. Quickli Platform Integration</h3>
+                        <p><strong>40+ lender calculator and comparison engine:</strong></p>
                         <ul>
-                            <li>JSONB for flexible data</li>
-                            <li>Dynamic relationships</li>
-                            <li>Unlimited company types</li>
-                            <li>Custom workflows</li>
-                            <li>Plugin architecture ready</li>
+                            <li>Automated Factfind data transfer</li>
+                            <li>Real-time rate and product comparison</li>
+                            <li>Best-fit loan recommendations</li>
+                            <li>Comprehensive lender analysis</li>
+                            <li>Cost comparison and fee analysis</li>
+                            <li>Client-friendly recommendation reports</li>
+                        </ul>
+                    </div>
+
+                    <div class="domain-card" style="border-top: 4px solid #ff9800;">
+                        <h3>5. ApplyOnline Integration</h3>
+                        <p><strong>Seamless application submission platform:</strong></p>
+                        <ul>
+                            <li>Direct handoff from Quickli selections</li>
+                            <li>Automated application package compilation</li>
+                            <li>Lender-specific submission formats</li>
+                            <li>Real-time application status tracking</li>
+                            <li>Communication hub for lender queries</li>
+                            <li>Settlement coordination and commission triggers</li>
+                        </ul>
+                    </div>
+
+                    <div class="domain-card" style="border-top: 4px solid #9c27b0;">
+                        <h3>6. Automated Factfind Generation</h3>
+                        <p><strong>Complete client profile compilation:</strong></p>
+                        <ul>
+                            <li>Template-based information structuring</li>
+                            <li>AI-extracted data population</li>
+                            <li>Client-completed gap information</li>
+                            <li>Regulatory compliance validation</li>
+                            <li>Broker review and customization</li>
+                            <li>Export to multiple formats (Quickli, ApplyOnline, PDF)</li>
+                        </ul>
+                    </div>
+
+                    <div class="domain-card" style="border-top: 4px solid #f39c12;">
+                        <h3>7. Commission & Settlement System</h3>
+                        <p><strong>End-to-end commission processing:</strong></p>
+                        <ul>
+                            <li>Settlement-triggered commission calculation</li>
+                            <li>Automated RCTI generation</li>
+                            <li>Referral commission splits</li>
+                            <li>Multi-tier broker hierarchies</li>
+                            <li>Payment tracking and reconciliation</li>
+                            <li>Commission reporting and analytics</li>
+                        </ul>
+                    </div>
+
+                    <div class="domain-card" style="border-top: 4px solid #607d8b;">
+                        <h3>8. Data Intelligence & Analytics</h3>
+                        <p><strong>Business intelligence and insights:</strong></p>
+                        <ul>
+                            <li>Client conversion funnel analysis</li>
+                            <li>AI processing accuracy metrics</li>
+                            <li>Quickli recommendation success rates</li>
+                            <li>ApplyOnline application outcomes</li>
+                            <li>Broker performance dashboards</li>
+                            <li>Predictive analytics for loan success</li>
                         </ul>
                     </div>
                 </div>

@@ -63,8 +63,10 @@
             font-size: 2.5em;
             padding-bottom: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
             margin-bottom: 0;
         }
         h2 {
@@ -250,10 +252,35 @@
             margin: 20px 0;
             border-radius: 8px;
         }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 600px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+            min-width: 800px;
+        }
         .mermaid a {
             color: #1976d2;
             text-decoration: underline;
             font-size: 10px;
+        }
+        @media (max-width: 768px) {
+            .mermaid {
+                min-height: 400px;
+            }
+            .mermaid svg {
+                min-width: 600px;
+            }
         }
     </style>
 </head>
@@ -1244,9 +1271,12 @@ flowchart TB
             startOnLoad: true,
             theme: 'default',
             flowchart: {
-                useMaxWidth: true,
+                useMaxWidth: false,
                 htmlLabels: true,
-                curve: 'basis'
+                curve: 'basis',
+                padding: 20,
+                nodeSpacing: 50,
+                rankSpacing: 80
             },
             er: {
                 layoutDirection: 'TB',
@@ -1255,6 +1285,18 @@ flowchart TB
                 entityPadding: 15,
                 stroke: '#333',
                 fill: '#fff'
+            },
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#5a67d8',
+                lineColor: '#333',
+                sectionBkgColor: '#f7fafc',
+                altSectionBkgColor: '#edf2f7',
+                gridColor: '#e2e8f0',
+                cScale0: '#667eea',
+                cScale1: '#764ba2',
+                cScale2: '#3498db'
             }
         });
     </script>

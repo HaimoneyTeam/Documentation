@@ -720,6 +720,169 @@
             color: #667eea;
         }
         
+        /* 系统摘要新样式 */
+        .summary-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .hero-content h3 {
+            font-size: 2.2em;
+            margin: 0 0 20px 0;
+            color: white;
+            border: none;
+        }
+        
+        .hero-description {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0.95;
+        }
+        
+        .core-features-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .core-features-header h3 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .core-features-header p {
+            color: #6c757d;
+            font-size: 1.1em;
+            margin: 0;
+        }
+        
+        .core-features-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .core-feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .core-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .core-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .kanban-card::before { background: linear-gradient(90deg, #3498db 0%, #2980b9 100%); }
+        .ai-card::before { background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%); }
+        .commission-card::before { background: linear-gradient(90deg, #f39c12 0%, #d68910 100%); }
+        .integration-card::before { background: linear-gradient(90deg, #27ae60 0%, #229954 100%); }
+        .analytics-card::before { background: linear-gradient(90deg, #9b59b6 0%, #8e44ad 100%); }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 15px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-content h3 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin: 0 0 6px 0;
+            text-align: center;
+        }
+        
+        .feature-subtitle {
+            color: #667eea;
+            font-size: 0.85em;
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-weight: 500;
+        }
+        
+        .feature-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-highlights li {
+            padding: 6px 0;
+            color: #495057;
+            position: relative;
+            padding-left: 18px;
+            font-size: 0.9em;
+        }
+        
+        .feature-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .value-proposition {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        
+        .value-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
         /* 确保不影响Mermaid图表 - 重置所有可能冲突的样式 */
         .mermaid .term {
             font-weight: inherit !important;
@@ -768,6 +931,39 @@
             
             .company-intro, .competitor-analysis, .advantage-grid, .glossary-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .core-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .core-feature-card {
+                padding: 15px;
+            }
+            
+            .feature-icon {
+                font-size: 2em;
+                height: 50px;
+                margin-bottom: 10px;
+            }
+            
+            .feature-content h3 {
+                font-size: 1em;
+            }
+            
+            .feature-subtitle {
+                font-size: 0.8em;
+                margin-bottom: 10px;
+            }
+            
+            .feature-highlights li {
+                font-size: 0.85em;
+                padding: 4px 0;
+            }
+            
+            .value-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -830,6 +1026,11 @@
             .tab-button {
                 padding: 12px 20px;
                 font-size: 14px;
+            }
+            
+            .core-features-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
         }
     </style>
@@ -1770,61 +1971,84 @@
 
             <h2>📌 系统摘要</h2>
             <div class="section">
-                <p><strong>HarbourX</strong> 是HaiMoney开发的AI驱动CRM系统，专为贷款经纪人打造。通过看板流程管理、智能文档识别、多用户佣金系统和第三方平台集成，全面提升经纪人工作效率，减少90%手动录入工作。</p>
+                <div class="core-features-header">
+                    <h3>🎯 五大核心功能板块</h3>
+                    <p>HarbourX围绕以下五个核心板块构建，为贷款经纪人提供完整的业务解决方案</p>
+                </div>
                 
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>📊 看板流程管理</h3>
-                        <ul>
-                            <li>客户生命周期可视化管理</li>
-                            <li>从Leads到Settlement全流程跟踪</li>
-                            <li>多阶段工作流自动推进</li>
-                            <li>实时状态更新和任务分配</li>
-                            <li>对标SalesTrekker看板功能</li>
-                        </ul>
+                <div class="core-features-grid">
+                    <div class="core-feature-card kanban-card">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-content">
+                            <h3>看板流程管理</h3>
+                            <p class="feature-subtitle">可视化客户生命周期管理</p>
+                            <ul class="feature-highlights">
+                                <li>从Leads到Settlement全流程跟踪</li>
+                                <li>多阶段工作流自动推进</li>
+                                <li>实时状态更新和任务分配</li>
+                                <li>对标SalesTrekker看板功能</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🤖 AI文档智能识别</h3>
-                        <ul>
-                            <li>自动提取个人基本信息</li>
-                            <li>工资单收入数据智能解析</li>
-                            <li>资产文档价值自动识别</li>
-                            <li>负债信息精准提取</li>
-                            <li>费用明细自动分类</li>
-                            <li>表格数据一键自动填充</li>
-                        </ul>
+                    
+                    <div class="core-feature-card ai-card">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-content">
+                            <h3>AI文档智能识别</h3>
+                            <p class="feature-subtitle">自动化信息提取与处理</p>
+                            <ul class="feature-highlights">
+                                <li>个人信息自动识别</li>
+                                <li>工资单收入数据智能解析</li>
+                                <li>资产负债信息精准提取</li>
+                                <li>表格数据一键自动填充</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>💰 多用户佣金管理</h3>
-                        <ul>
-                            <li>RCTI自动生成和计算</li>
-                            <li>Broker佣金智能分配</li>
-                            <li>Referrer推荐费管理</li>
-                            <li>多层级佣金分成</li>
-                            <li>实时佣金跟踪和报告</li>
-                        </ul>
+                    
+                    <div class="core-feature-card commission-card">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-content">
+                            <h3>多用户佣金管理</h3>
+                            <p class="feature-subtitle">智能化佣金计算与分配</p>
+                            <ul class="feature-highlights">
+                                <li>RCTI自动生成和计算</li>
+                                <li>Broker佣金智能分配</li>
+                                <li>Referrer推荐费管理</li>
+                                <li>多层级佣金分成体系</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🔗 第三方API集成</h3>
-                        <ul>
-                            <li><strong>AI平台:</strong> 文档OCR和数据提取</li>
-                            <li><strong>Quickli:</strong> 40+贷款机构比较</li>
-                            <li><strong>ApplyOnline:</strong> 贷款申请提交</li>
-                            <li><strong>Track My Trail:</strong> 佣金数据同步</li>
-                            <li>无缝数据流转和状态同步</li>
-                        </ul>
+                    
+                    <div class="core-feature-card integration-card">
+                        <div class="feature-icon">🔗</div>
+                        <div class="feature-content">
+                            <h3>第三方API集成</h3>
+                            <p class="feature-subtitle">无缝连接外部平台</p>
+                            <ul class="feature-highlights">
+                                <li><strong>Quickli:</strong> 40+贷款机构比较</li>
+                                <li><strong>ApplyOnline:</strong> 贷款申请提交</li>
+                                <li><strong>Track My Trail:</strong> 佣金数据同步</li>
+                                <li><strong>AI平台:</strong> 文档OCR处理</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>📈 智能数据统计</h3>
-                        <ul>
-                            <li>通过Track My Trail汇总贷款金额</li>
-                            <li>佣金收入自动统计分析</li>
-                            <li>客户转化率和成功率报告</li>
-                            <li>经纪人绩效仪表板</li>
-                            <li>实时业务洞察和趋势分析</li>
-                        </ul>
+                    
+                    <div class="core-feature-card analytics-card">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-content">
+                            <h3>智能数据统计</h3>
+                            <p class="feature-subtitle">实时业务洞察与分析</p>
+                            <ul class="feature-highlights">
+                                <li>贷款金额自动汇总统计</li>
+                                <li>佣金收入分析报告</li>
+                                <li>客户转化率跟踪</li>
+                                <li>经纪人绩效仪表板</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                
+                
             </div>
 
             <h2>🏗️ 系统架构</h2>

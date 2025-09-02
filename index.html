@@ -848,7 +848,7 @@
         </div>
 
         <!-- Intro Section -->
-        <div id="intro-section" class="tab-content active">
+        <div id="intro-section" class="tab-content ">
             <div class="alert alert-info">
                 <strong>📅 项目概述：</strong> 2025年HaiMoney CRM系统开发项目<br>
                 <strong>🎯 目标：</strong> 构建AI驱动的CRM系统，对标母公司Finsure的Infynity CRM<br>
@@ -1097,7 +1097,7 @@
         </div>
 
         <!-- Database Design Tab -->
-        <div id="database-design" class="tab-content">
+        <div id="database-design" class="tab-content active">
             
             <h2>💾 数据库架构 - 完整设计</h2>
             <div class="section">
@@ -2638,16 +2638,25 @@ flowchart TB
             setTimeout(function() {
                 if (typeof mermaid !== 'undefined') {
                     try {
-                        mermaid.init(undefined, document.getElementById(tabName).querySelectorAll('.mermaid'));
+                        // 清除已渲染的mermaid图表
+                        const mermaidElements = document.getElementById(tabName).querySelectorAll('.mermaid');
+                        mermaidElements.forEach(function(element) {
+                            if (element.getAttribute('data-processed') === 'true') {
+                                element.removeAttribute('data-processed');
+                                element.innerHTML = element.textContent;
+                            }
+                        });
+                        // 重新初始化
+                        mermaid.init(undefined, mermaidElements);
                     } catch (e) {
-                        console.log('Mermaid reinitialization attempted');
+                        console.log('Mermaid reinitialization attempted:', e);
                     }
                 }
             }, 100);
         }
 
         mermaid.initialize({ 
-            startOnLoad: true,
+            startOnLoad: false,
             theme: 'default',
             flowchart: {
                 useMaxWidth: false,
@@ -2687,14 +2696,20 @@ flowchart TB
             setTimeout(function() {
                 if (typeof mermaid !== 'undefined') {
                     try {
-                        // 重新初始化所有mermaid图表
-                        mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-                        console.log('所有Mermaid图表初始化完成');
+                        // 只渲染当前可见tab中的图表
+                        const activeTab = document.querySelector('.tab-content.active');
+                        if (activeTab) {
+                            const mermaidElements = activeTab.querySelectorAll('.mermaid');
+                            if (mermaidElements.length > 0) {
+                                mermaid.init(undefined, mermaidElements);
+                                console.log('当前可见Mermaid图表初始化完成');
+                            }
+                        }
                     } catch (e) {
                         console.log('Mermaid初始化尝试:', e);
                     }
                 }
-            }, 200);
+            }, 300);
         });
     </script>
 </body>

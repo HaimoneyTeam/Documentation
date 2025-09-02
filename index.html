@@ -12,6 +12,77 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
+        /* 密码保护覆盖层 */
+        #passwordProtection {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .password-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            min-width: 350px;
+        }
+        
+        .password-box h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            border: none;
+        }
+        
+        .password-box p {
+            color: #6c757d;
+            margin-bottom: 25px;
+        }
+        
+        .password-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        .password-box input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        
+        .password-box button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .password-box button:hover {
+            opacity: 0.9;
+        }
+        
+        .password-error {
+            color: #e74c3c;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
         .container {
             background: white;
             border-radius: 20px;
@@ -1036,6 +1107,17 @@
     </style>
 </head>
 <body>
+    <!-- 密码保护覆盖层 -->
+    <div id="passwordProtection">
+        <div class="password-box">
+            <h2>🔒 HarbourX 文档访问</h2>
+            <p>请输入密码以访问系统设计文档</p>
+            <input type="password" id="passwordField" placeholder="请输入访问密码" maxlength="50">
+            <button onclick="checkAccess()">🚀 访问文档</button>
+            <div id="passwordError" class="password-error" style="display: none;"></div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header-section">
             <h1>🚢 HarbourX - 完整系统设计与架构</h1>
@@ -2843,8 +2925,41 @@ flowchart TB
         </div>
 </div>
 
-    <script>
-
+        <script>
+        // 密码保护功能
+        const ACCESS_PASSWORD = "HMharbourx2025$$";
+        
+        function checkAccess() {
+            const inputPassword = document.getElementById('passwordField').value;
+            const errorDiv = document.getElementById('passwordError');
+            
+            if (inputPassword === ACCESS_PASSWORD) {
+                // 密码正确，隐藏覆盖层
+                document.getElementById('passwordProtection').style.display = 'none';
+                // 确保滚动正常
+                document.body.style.overflow = 'auto';
+            } else {
+                // 密码错误
+                errorDiv.textContent = '❌ 密码错误，请重试';
+                errorDiv.style.display = 'block';
+                document.getElementById('passwordField').value = '';
+                document.getElementById('passwordField').focus();
+            }
+        }
+        
+        // 回车键支持
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordField').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkAccess();
+                }
+            });
+            
+            // 自动聚焦
+            setTimeout(function() {
+                document.getElementById('passwordField').focus();
+            }, 100);
+        });
 
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;

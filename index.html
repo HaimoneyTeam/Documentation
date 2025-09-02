@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>HarbourX - 完整系统设计与架构</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -264,6 +264,65 @@
             margin: 20px 0;
             border-radius: 8px;
         }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 500px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .mermaid.small {
+            min-height: 300px;
+            padding: 15px;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+            min-width: 100%;
+        }
+        .mermaid a {
+            color: #1976d2;
+            text-decoration: underline;
+            font-size: 10px;
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 1200px) {
+            .mermaid {
+                min-height: 450px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mermaid {
+                min-height: 350px;
+                padding: 10px;
+                overflow-x: scroll;
+            }
+            .mermaid svg {
+                min-width: 320px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mermaid {
+                min-height: 300px;
+                padding: 8px;
+            }
+            .mermaid svg {
+                min-width: 280px;
+                font-size: 10px;
+            }
+        }
+        
         /* 新图表样式 */
         .architecture-overview {
             background: white;
@@ -1266,7 +1325,7 @@
                 <strong>📊 状态:</strong> 需求分析阶段
             </div>
 
-            <h2>📌 执行摘要</h2>
+            <h2>📌 摘要</h2>
             <div class="section">
                 <p><strong>HarbourX</strong> 是一个全面的以客户为中心的金融服务平台，彻底改变了经纪人如何收集、处理和管理贷款申请的客户信息。该系统结合了智能文档处理、AI驱动的数据提取以及与行业领先平台（如Quickli和ApplyOnline）的无缝集成，以简化整个贷款发起流程。</p>
                 
@@ -1287,7 +1346,7 @@
                         <ul>
                             <li>以客户为中心的看板</li>
                             <li>AI文档分析与提取</li>
-                            <li>自动生成的Factfind模板</li>
+                            <li>客户填写的Factfind模板</li>
                             <li>客户门户获取缺失信息</li>
                             <li>Quickli集成进行贷款比较</li>
                             <li>ApplyOnline申请提交</li>
@@ -1309,46 +1368,69 @@
 
             <h2>🏗️ 系统架构</h2>
             <div class="section">
-                
-                <div class="architecture-overview">
-                    <h3>系统架构概览</h3>
-                    <div class="arch-layers">
-                        <div class="arch-layer">
-                            <h4>客户端层</h4>
-                            <ul>
-                                <li>网页浏览器</li>
-                                <li>移动浏览器</li>
-                                <li>外部API</li>
-                            </ul>
-                        </div>
-                        <div class="arch-layer">
-                            <h4>应用层</h4>
-                            <ul>
-                                <li><strong>核心模块：</strong>认证、用户管理、贷款处理、佣金、客户门户</li>
-                                <li><strong>新功能：</strong>看板、推荐系统、AI/ML引擎、文档管理、数字签名</li>
-                            </ul>
-                        </div>
-                        <div class="arch-layer">
-                            <h4>外部服务</h4>
-                            <ul>
-                                <li>Quickli平台</li>
-                                <li>ApplyOnline</li>
-                                <li>贷款机构API</li>
-                                <li>信用检查</li>
-                                <li>身份验证</li>
-                                <li>邮件服务</li>
-                                <li>SMS网关</li>
-                            </ul>
-                        </div>
-                        <div class="arch-layer">
-                            <h4>数据层</h4>
-                            <ul>
-                                <li>PostgreSQL数据库</li>
-                                <li>Redis缓存</li>
-                                <li>对象存储</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="mermaid">
+flowchart TB
+    subgraph "Client Layer"
+        WEB[Web Browser]
+        MOB[Mobile Browser]
+        API[External APIs]
+    end
+    
+    subgraph "Application Layer"
+        APP[HarbourX Monolith]
+        
+        subgraph "Core Modules"
+            AUTH[Authentication]
+            USER[User Management]
+            LOAN[Loan Processing]
+            COMM[Commissions]
+            PORT[Client Portal]
+        end
+        
+        subgraph "New Features"
+            KAN[Kanban Board]
+            REF[Referral System]
+            AI[AI/ML Engine]
+            DOC[Document Manager]
+            SIGN[Digital Signatures]
+        end
+    end
+    
+    subgraph "External Services"
+        QUICKLI[Quickli Platform]
+        APPLYONLINE[ApplyOnline]
+        LEND[Lender APIs]
+        CREDIT[Credit Check]
+        KYC[Identity Verification]
+        EMAIL[Email Service]
+        SMS[SMS Gateway]
+    end
+    
+    subgraph "Data Layer"
+        PG[(PostgreSQL)]
+        REDIS[(Redis Cache)]
+        S3[Object Storage]
+    end
+    
+    WEB --> APP
+    MOB --> APP
+    API --> APP
+    
+    APP --> PG
+    APP --> REDIS
+    APP --> S3
+    
+    APP --> QUICKLI
+    APP --> APPLYONLINE
+    APP --> LEND
+    APP --> CREDIT
+    APP --> KYC
+    APP --> EMAIL
+    APP --> SMS
+    
+    style APP fill:#667eea,color:#fff
+    style PG fill:#336791,color:#fff
+    style REDIS fill:#dc382d,color:#fff
                 </div>
             </div>
 
@@ -1386,7 +1468,7 @@
                             <div class="step-number">4</div>
                             <div class="step-content">
                                 <h4>AI自动处理</h4>
-                                <p>生成Factfind文档</p>
+                                <p>AI识别文档信息</p>
                             </div>
                         </div>
                         <div class="flow-arrow">→</div>
@@ -1441,7 +1523,7 @@
                         <div class="flow-arrow">→</div>
                         <div class="kanban-step">
                             <div class="step-icon">📋</div>
-                            <h4>Factfind生成</h4>
+                            <h4>信息收集完成</h4>
                             <p>审查与完善</p>
                         </div>
                         <div class="flow-arrow">→</div>
@@ -1518,7 +1600,7 @@
                         <div class="integration-step">
                             <div class="step-icon">🏢</div>
                             <h4>HarbourX</h4>
-                            <p>生成Factfind</p>
+                            <p>客户填写或AI识别</p>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="integration-step">
@@ -1543,7 +1625,7 @@
                         <h4>详细流程说明：</h4>
                         <ul>
                             <li>客户在HarbourX完成信息收集</li>
-                            <li>系统自动生成Factfind文档</li>
+                            <li>客户手动填写或AI自动识别文档信息</li>
                             <li>数据发送到Quickli进行分析</li>
                             <li>Quickli返回贷款推荐</li>
                             <li>客户选择并批准方案</li>
@@ -1563,17 +1645,14 @@
                                 <div class="exp-step">
                                     <span class="step-emoji">📧</span>
                                     <span>接收门户链接</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">👤</span>
                                     <span>创建账户</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">🔐</span>
                                     <span>验证身份</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                             </div>
                         </div>
@@ -1584,27 +1663,22 @@
                                 <div class="exp-step">
                                     <span class="step-emoji">📱</span>
                                     <span>查看仪表板</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">💰</span>
                                     <span>上传工资单</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">🏠</span>
                                     <span>上传资产文档</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">💳</span>
                                     <span>上传负债文档</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">🤖</span>
                                     <span>获取AI反馈</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                             </div>
                         </div>
@@ -1615,22 +1689,20 @@
                                 <div class="exp-step">
                                     <span class="step-emoji">📋</span>
                                     <span>审查缺失信息</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">✏️</span>
                                     <span>填写个人详情</span>
-                                    <span class="rating">⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">💕</span>
                                     <span>添加婚姻状况</span>
-                                    <span class="rating">⭐⭐⭐</span>
+                                    <span class="rating"></span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">✅</span>
                                     <span>提交完成</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
+                                    <span class="rating"></span>
                                 </div>
                             </div>
                         </div>
@@ -1641,22 +1713,18 @@
                                 <div class="exp-step">
                                     <span class="step-emoji">🔍</span>
                                     <span>查看贷款选项</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">📊</span>
                                     <span>比较利率</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">👍</span>
                                     <span>选择首选方案</span>
-                                    <span class="rating">⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">✍️</span>
                                     <span>批准申请</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                             </div>
                         </div>
@@ -1667,17 +1735,14 @@
                                 <div class="exp-step">
                                     <span class="step-emoji">📊</span>
                                     <span>监控进度</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">📢</span>
                                     <span>接收更新</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                                 <div class="exp-step">
                                     <span class="step-emoji">🎉</span>
                                     <span>最终通知</span>
-                                    <span class="rating">⭐⭐⭐⭐⭐</span>
                                 </div>
                             </div>
                         </div>
@@ -1712,7 +1777,7 @@
                             <li><strong>负债评估：</strong> 现有贷款、信用卡限额、承诺</li>
                             <li><strong>OCR处理：</strong> 将所有文档类型转换为结构化数据</li>
                             <li><strong>数据验证：</strong> 交叉引用和验证提取的信息</li>
-                            <li><strong>自动填充Factfind：</strong> 填充全面的客户档案</li>
+                            <li><strong>AI辅助信息识别：</strong> 从文档自动识别信息</li>
                         </ul>
                     </div>
 
@@ -1733,7 +1798,7 @@
                         <h3>4. Quickli平台集成</h3>
                         <p><strong>40+贷款机构计算器和比较引擎：</strong></p>
                         <ul>
-                            <li>自动化Factfind数据传输</li>
+                            <li>Factfind数据自动传输</li>
                             <li>实时利率和产品比较</li>
                             <li>最佳匹配贷款推荐</li>
                             <li>全面的贷款机构分析</li>
@@ -1756,11 +1821,11 @@
                     </div>
 
                     <div class="domain-card" style="border-top: 4px solid #9c27b0;">
-                        <h3>6. 自动化Factfind生成</h3>
+                        <h3>6. 客户信息收集与AI识别</h3>
                         <p><strong>完整的客户档案编译：</strong></p>
                         <ul>
-                            <li>基于模板的信息结构化</li>
-                            <li>AI提取的数据填充</li>
+                            <li>客户在portal手动填写信息</li>
+                            <li>AI自动识别上传文档信息</li>
                             <li>客户完成的缺口信息</li>
                             <li>监管合规验证</li>
                             <li>经纪人审查和定制</li>
@@ -1925,7 +1990,7 @@
                                     <li>贷款摘要</li>
                                     <li>合规生成</li>
                                     <li>最佳利益义务</li>
-                                    <li>Factfind提取</li>
+                                    <li>客户信息提取</li>
                                     <li>财务分析</li>
                                     <li>工资单分析</li>
                                 </ul>
@@ -2003,14 +2068,14 @@
                         <h3>阶段1：UI/UX设计</h3>
                         <h4>设计系统与用户体验</h4>
                         <ul>
-                            <li>⬜ 用户研究与角色</li>
-                            <li>⬜ 信息架构</li>
-                            <li>⬜ 所有模块的线框图</li>
-                            <li>⬜ 设计系统与组件库</li>
-                            <li>⬜ 看板UI设计</li>
-                            <li>⬜ 客户门户界面</li>
-                            <li>⬜ 移动响应式设计</li>
-                            <li>⬜ 可用性测试</li>
+                            <li>用户研究与角色</li>
+                            <li>信息架构</li>
+                            <li>所有模块的线框图</li>
+                            <li>设计系统与组件库</li>
+                            <li>看板UI设计</li>
+                            <li>客户门户界面</li>
+                            <li>移动响应式设计</li>
+                            <li>可用性测试</li>
                         </ul>
                     </div>
 
@@ -2018,12 +2083,25 @@
                         <h3>阶段2：数据库架构</h3>
                         <h4>数据层基础</h4>
                         <ul>
-                            <li>✅ 设计统一数据库架构</li>
-                            <li>✅ 定义所有实体关系</li>
-                            <li>⬜ 从微服务创建迁移脚本</li>
-                            <li>⬜ 设置数据库索引和约束</li>
-                            <li>⬜ 实现审计日志结构</li>
-                            <li>⬜ 数据去重策略</li>
+                            <li>设计统一数据库架构</li>
+                            <li>定义所有实体关系</li>
+                            <li>从微服务创建迁移脚本</li>
+                            <li>设置数据库索引和约束</li>
+                            <li>实现审计日志结构</li>
+                            <li>数据去重策略</li>
+                        </ul>
+                    </div>
+
+                    <div class="domain-card" style="border-top: 4px solid #9c27b0;">
+                        <h3>阶段3：基础架构搭建</h3>
+                        <h4>技术基础设施</h4>
+                        <ul>
+                            <li>数据库设置（PostgreSQL + MongoDB）</li>
+                            <li>Go/Spring Boot项目结构</li>
+                            <li>基本认证系统</li>
+                            <li>AWS S3文件存储配置</li>
+                            <li>React项目设置（TypeScript）</li>
+                            <li>基础基础设施就绪</li>
                         </ul>
                     </div>
 
@@ -2031,13 +2109,26 @@
                         <h3>阶段4：核心迁移</h3>
                         <h4>单体开发</h4>
                         <ul>
-                            <li>⬜ 用户与认证系统</li>
-                            <li>⬜ 公司与角色管理</li>
-                            <li>⬜ 贷款处理管道</li>
-                            <li>⬜ 佣金计算</li>
-                            <li>⬜ RCTI生成</li>
-                            <li>⬜ 数据迁移与清理</li>
-                            <li>⬜ 移除K8s复杂性</li>
+                            <li>用户与认证系统</li>
+                            <li>公司与角色管理</li>
+                            <li>贷款处理管道</li>
+                            <li>佣金计算</li>
+                            <li>RCTI生成</li>
+                            <li>数据迁移与清理</li>
+                            <li>移除K8s复杂性</li>
+                        </ul>
+                    </div>
+
+                    <div class="domain-card" style="border-top: 4px solid #f39c12;">
+                        <h3>阶段5：系统集成与测试</h3>
+                        <h4>集成测试与优化</h4>
+                        <ul>
+                            <li>佣金流程端到端测试</li>
+                            <li>文件上传压力测试</li>
+                            <li>看板用户测试</li>
+                            <li>错误修复和优化</li>
+                            <li>生产就绪里程碑1</li>
+                            <li>性能优化与监控</li>
                         </ul>
                     </div>
 
@@ -2045,17 +2136,17 @@
                         <h3>阶段6：新功能</h3>
                         <h4>功能实施</h4>
                         <ul>
-                            <li>⬜ 带分成的推荐系统</li>
-                            <li>⬜ 看板贷款管理</li>
-                            <li>⬜ 客户门户与上传</li>
-                            <li>⬜ 数字签名</li>
-                            <li>⬜ <strong>AI贷款摘要</strong> - 自动生成全面贷款摘要</li>
-                            <li>⬜ <strong>合规文件生成</strong> - 自动化监管文档</li>
-                            <li>⬜ <strong>最佳利益义务</strong> - 合规检查与建议</li>
-                            <li>⬜ <strong>Factfind提取</strong> - 从文档提取客户数据</li>
-                            <li>⬜ <strong>财务报告分析</strong> - 自动解析银行对账单</li>
-                            <li>⬜ <strong>工资单分析</strong> - 收入验证与提取</li>
-                            <li>⬜ 高级文件处理（DOCX、PDF、Excel、CSV、RCTI）</li>
+                            <li>带分成的推荐系统</li>
+                            <li>看板贷款管理</li>
+                            <li>客户门户与上传</li>
+                            <li>数字签名</li>
+                            <li><strong>AI贷款摘要</strong> - 自动生成全面贷款摘要</li>
+                            <li><strong>合规文件生成</strong> - 自动化监管文档</li>
+                            <li><strong>最佳利益义务</strong> - 合规检查与建议</li>
+                            <li><strong>客户信息提取</strong> - 从文档提取客户数据</li>
+                            <li><strong>财务报告分析</strong> - 自动解析银行对账单</li>
+                            <li><strong>工资单分析</strong> - 收入验证与提取</li>
+                            <li>高级文件处理（DOCX、PDF、Excel、CSV、RCTI）</li>
                         </ul>
                     </div>
                 </div>
@@ -2097,6 +2188,39 @@
             evt.currentTarget.classList.add("active");
         }
 
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20,
+                nodeSpacing: 50,
+                rankSpacing: 80
+            },
+            er: {
+                layoutDirection: 'TB',
+                minEntityWidth: 100,
+                minEntityHeight: 75,
+                entityPadding: 15,
+                stroke: '#333',
+                fill: '#fff'
+            },
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#5a67d8',
+                lineColor: '#333',
+                sectionBkgColor: '#f7fafc',
+                altSectionBkgColor: '#edf2f7',
+                gridColor: '#e2e8f0',
+                cScale0: '#667eea',
+                cScale1: '#764ba2',
+                cScale2: '#3498db'
+            }
+        });
+        
         // 页面加载完成后的初始化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('HarbourX 系统设计文档已加载完成');

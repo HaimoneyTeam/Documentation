@@ -28,6 +28,7 @@
             <button class="tab-button active" onclick="openTab(event, 'intro-section')">🏢 公司介绍</button>
             <button class="tab-button" onclick="openTab(event, 'feature-design')">🎯 功能设计</button>
             <button class="tab-button" onclick="openTab(event, 'database-design')">🗄️ 数据库设计</button>
+            <button class="tab-button" onclick="openTab(event, 'uiux-design')">🎨 UI/UX设计</button>
         </div>
 
         <!-- Intro Section -->
@@ -1805,6 +1806,170 @@ flowchart TB
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- UI/UX Design Section -->
+        <div id="uiux-design" class="tab-content">
+            <div class="alert alert-info">
+                <strong>🎨 UI/UX设计目标：</strong> 创建直观、高效、美观的用户界面，提升Broker工作效率<br>
+                <strong>🎯 核心页面：</strong> 看板系统、贷款申请管理、客户信息录入<br>
+                <strong>💡 设计理念：</strong> 以Broker为中心，简化工作流程，最大化AI辅助功能
+            </div>
+
+            <h2>🎯 看板系统设计 - 核心用户流程</h2>
+            <div class="section">
+                <h3>📊 看板页面布局设计</h3>
+                <div class="kanban-overview">
+                    <div class="design-card">
+                        <h4>🏠 主看板布局</h4>
+                        <ul>
+                            <li><strong>顶部导航栏：</strong> 用户信息、通知、设置、帮助</li>
+                            <li><strong>左侧边栏：</strong> 快速筛选、状态过滤、搜索功能</li>
+                            <li><strong>中央看板区域：</strong> 多列拖拽式布局（待处理、进行中、审核中、已完成）</li>
+                            <li><strong>右侧信息面板：</strong> 选中卡片详情、快速操作按钮</li>
+                            <li><strong>浮动操作按钮：</strong> 右上角"Add New"按钮，始终可见</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="design-card">
+                        <h4>🎨 视觉设计原则</h4>
+                        <ul>
+                            <li><strong>色彩系统：</strong> 专业金融色调，状态色彩区分</li>
+                            <li><strong>卡片设计：</strong> 简洁信息展示，悬停效果增强</li>
+                            <li><strong>响应式布局：</strong> 支持桌面端、平板、移动端</li>
+                            <li><strong>无障碍设计：</strong> 高对比度、键盘导航支持</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔄 用户流程图</h3>
+                <div class="mermaid-diagram">
+                    <div class="mermaid">
+                        flowchart TD
+                            A[Broker登录系统] --> B[进入看板首页]
+                            B --> C{查看现有申请}
+                            C --> D[浏览看板列]
+                            D --> E[点击卡片查看详情]
+                            
+                            B --> F[点击Add New按钮]
+                            F --> G[弹出新建申请浮窗]
+                            G --> H[选择Applicant Type]
+                            H --> I[填写基本信息]
+                            I --> J[创建贷款申请卡片]
+                            J --> K[卡片出现在待处理列]
+                            
+                            E --> L[进入详情页面]
+                            L --> M[查看/编辑申请信息]
+                            M --> N[管理多个Applicants]
+                            N --> O[填写Personal Info]
+                            N --> P[填写Company Info]
+                            N --> Q[填写Asset信息]
+                            N --> R[填写Income信息]
+                            N --> S[填写Expense信息]
+                            N --> T[填写Liability信息]
+                            
+                            O --> U[上传相关文件]
+                            P --> U
+                            Q --> U
+                            R --> U
+                            S --> U
+                            T --> U
+                            
+                            U --> V[AI自动识别信息]
+                            V --> W[人工验证和补充]
+                            W --> X[保存申请信息]
+                            X --> Y[更新看板状态]
+                            
+                            classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+                            classDef start fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                            classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                            classDef action fill:#fff3e0,stroke:#e65100,stroke-width:2px
+                            classDef detail fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+                            classDef ai fill:#fff8e1,stroke:#f57f17,stroke-width:2px
+                            
+                            class A start
+                            class B,C,D,E,L,M,N process
+                            class F,G,H,I,J,K action
+                            class O,P,Q,R,S,T,U detail
+                            class V,W,X,Y ai
+                    </div>
+                </div>
+
+                <h3>📝 新建申请浮窗设计</h3>
+                <div class="modal-design">
+                    <div class="design-card">
+                        <h4>🎯 浮窗布局结构</h4>
+                        <ul>
+                            <li><strong>标题栏：</strong> "新建贷款申请" + 关闭按钮</li>
+                            <li><strong>第一步：</strong> Applicant Type选择（Individual/Company/Trust）</li>
+                            <li><strong>第二步：</strong> 基本信息填写（姓名/公司名、联系方式、申请金额等）</li>
+                            <li><strong>操作按钮：</strong> 取消、保存草稿、创建申请</li>
+                            <li><strong>进度指示：</strong> 顶部进度条显示当前步骤</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="design-card">
+                        <h4>💡 交互设计要点</h4>
+                        <ul>
+                            <li><strong>分步引导：</strong> 避免信息过载，逐步引导用户</li>
+                            <li><strong>智能默认值：</strong> 基于用户历史提供智能建议</li>
+                            <li><strong>实时验证：</strong> 输入时即时验证格式和完整性</li>
+                            <li><strong>快速操作：</strong> 支持从模板创建、复制现有申请</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📋 申请详情页面设计</h3>
+                <div class="detail-page-design">
+                    <div class="design-card">
+                        <h4>🏗️ 页面结构布局</h4>
+                        <ul>
+                            <li><strong>顶部信息栏：</strong> 申请状态、优先级、创建时间、最后更新</li>
+                            <li><strong>左侧导航：</strong> 各信息模块快速跳转（Applicants、Documents、Timeline等）</li>
+                            <li><strong>主要内容区：</strong> 当前选中模块的详细表单</li>
+                            <li><strong>右侧操作面板：</strong> 快速操作、状态变更、备注添加</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="design-card">
+                        <h4>📊 信息模块设计</h4>
+                        <ul>
+                            <li><strong>Personal Info：</strong> 个人基本信息、联系方式、身份验证</li>
+                            <li><strong>Company Info：</strong> 公司注册信息、业务类型、财务数据</li>
+                            <li><strong>Asset：</strong> 资产清单、估值、所有权证明</li>
+                            <li><strong>Income：</strong> 收入来源、金额、稳定性证明</li>
+                            <li><strong>Expense：</strong> 支出分类、金额、必要性分析</li>
+                            <li><strong>Liability：</strong> 债务清单、还款计划、信用记录</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🤖 AI文档识别界面设计</h3>
+                <div class="ai-interface-design">
+                    <div class="design-card">
+                        <h4>📁 文件上传区域</h4>
+                        <ul>
+                            <li><strong>拖拽上传：</strong> 支持拖拽文件到指定区域</li>
+                            <li><strong>文件类型支持：</strong> PDF、DOCX、Excel、图片、扫描件</li>
+                            <li><strong>批量上传：</strong> 一次上传多个相关文件</li>
+                            <li><strong>上传进度：</strong> 实时显示上传和处理进度</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="design-card">
+                        <h4>🔍 AI识别结果展示</h4>
+                        <ul>
+                            <li><strong>识别状态：</strong> 处理中、完成、失败状态指示</li>
+                            <li><strong>结果对比：</strong> 原文档与AI提取信息并排显示</li>
+                            <li><strong>置信度评分：</strong> 显示AI识别的准确度</li>
+                            <li><strong>手动修正：</strong> 支持用户编辑AI识别结果</li>
+                            <li><strong>批量操作：</strong> 批量确认或拒绝AI识别结果</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            
         </div>
 
     

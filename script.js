@@ -48,7 +48,7 @@ function openTab(evt, tabName) {
     
     // 重新渲染Mermaid图表当tab变为可见时
     setTimeout(function() {
-        if (typeof mermaid !== 'undefined' && tabName === 'feature-design') {
+        if (typeof mermaid !== 'undefined' && (tabName === 'feature-design' || tabName === 'uiux-design')) {
             try {
                 // 获取新激活tab中的所有mermaid元素
                 const activeTabElement = document.getElementById(tabName);

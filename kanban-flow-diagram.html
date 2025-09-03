@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarbourX 看板系统流程图</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .diagram-section {
+            margin-bottom: 40px;
+        }
+        
+        .diagram-title {
+            color: #34495e;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .mermaid {
+            text-align: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .description {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .description h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .description ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .description li {
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .highlight strong {
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .mermaid {
+                padding: 15px;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚢 HarbourX 看板系统流程图</h1>
+        
+        <div class="diagram-section">
+            <h2 class="diagram-title">🔄 核心用户流程 - Broker操作看板</h2>
+            <div class="mermaid">
+                flowchart TD
+                    A[Broker登录系统] --> B[进入看板首页]
+                    B --> C{查看现有申请}
+                    C --> D[浏览看板列]
+                    D --> E[点击卡片查看详情]
+                    
+                    B --> F[点击Add New按钮]
+                    F --> G[弹出新建申请浮窗]
+                    G --> H[选择Applicant Type]
+                    H --> I[填写基本信息]
+                    I --> J[创建贷款申请卡片]
+                    J --> K[卡片出现在待处理列]
+                    
+                    E --> L[进入详情页面]
+                    L --> M[查看/编辑申请信息]
+                    M --> N[管理多个Applicants]
+                    N --> O[填写Personal Info]
+                    N --> P[填写Company Info]
+                    N --> Q[填写Asset信息]
+                    N --> R[填写Income信息]
+                    N --> S[填写Expense信息]
+                    N --> T[填写Liability信息]
+                    
+                    O --> U[上传相关文件]
+                    P --> U
+                    Q --> U
+                    R --> U
+                    S --> U
+                    T --> U
+                    
+                    U --> V[AI自动识别信息]
+                    V --> W[人工验证和补充]
+                    W --> X[保存申请信息]
+                    X --> Y[更新看板状态]
+                    
+                    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+                    classDef start fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                    classDef action fill:#fff3e0,stroke:#e65100,stroke-width:2px
+                    classDef detail fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+                    classDef ai fill:#fff8e1,stroke:#f57f17,stroke-width:2px
+                    
+                    class A start
+                    class B,C,D,E,L,M,N process
+                    class F,G,H,I,J,K action
+                    class O,P,Q,R,S,T,U detail
+                    class V,W,X,Y ai
+            </div>
+            
+            <div class="description">
+                <h3>📋 流程说明</h3>
+                <ul>
+                    <li><strong>入口流程：</strong> Broker登录后直接进入看板首页，可以查看所有贷款申请的状态</li>
+                    <li><strong>新建申请：</strong> 通过右上角的"Add New"按钮快速创建新的贷款申请</li>
+                    <li><strong>申请管理：</strong> 点击卡片进入详情页面，管理申请的所有相关信息</li>
+                    <li><strong>AI辅助：</strong> 上传文件后AI自动识别信息，减少手动录入工作</li>
+                    <li><strong>状态更新：</strong> 信息完善后自动更新看板状态，保持流程透明</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram-section">
+            <h2 class="diagram-title">🏗️ 看板页面布局结构</h2>
+            <div class="mermaid">
+                flowchart TB
+                    subgraph "顶部导航栏"
+                        A1[用户信息] --- A2[通知中心] --- A3[系统设置] --- A4[帮助文档]
+                    end
+                    
+                    subgraph "左侧边栏"
+                        B1[快速筛选] --- B2[状态过滤] --- B3[搜索功能] --- B4[保存的视图]
+                    end
+                    
+                    subgraph "中央看板区域"
+                        C1[待处理列] --- C2[进行中列] --- C3[审核中列] --- C4[已完成列]
+                        C1 --> C1_1[申请卡片1]
+                        C1 --> C1_2[申请卡片2]
+                        C2 --> C2_1[申请卡片3]
+                        C3 --> C3_1[申请卡片4]
+                        C4 --> C4_1[申请卡片5]
+                    end
+                    
+                    subgraph "右侧信息面板"
+                        D1[选中卡片详情] --- D2[快速操作按钮] --- D3[状态变更] --- D4[备注添加]
+                    end
+                    
+                    subgraph "浮动操作"
+                        E1[Add New按钮]
+                    end
+                    
+                    classDef nav fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+                    classDef sidebar fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+                    classDef kanban fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+                    classDef info fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+                    classDef action fill:#ffcdd2,stroke:#d32f2f,stroke-width:2px
+                    
+                    class A1,A2,A3,A4 nav
+                    class B1,B2,B3,B4 sidebar
+                    class C1,C2,C3,C4 kanban
+                    class D1,D2,D3,D4 info
+                    class E1 action
+            </div>
+            
+            <div class="description">
+                <h3>🎨 布局设计要点</h3>
+                <ul>
+                    <li><strong>顶部导航：</strong> 提供全局功能访问，包括用户管理、通知、设置等</li>
+                    <li><strong>左侧边栏：</strong> 提供快速筛选和搜索功能，帮助Broker快速定位申请</li>
+                    <li><strong>中央看板：</strong> 采用拖拽式多列布局，直观显示申请状态和进度</li>
+                    <li><strong>右侧面板：</strong> 显示选中卡片的详细信息，提供快速操作入口</li>
+                    <li><strong>浮动按钮：</strong> Add New按钮始终可见，便于快速创建新申请</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram-section">
+            <h2 class="diagram-title">📝 新建申请浮窗流程</h2>
+            <div class="mermaid">
+                graph LR
+                    A[点击Add New] --> B[弹出浮窗]
+                    B --> C[第一步：选择类型]
+                    C --> D{Applicant Type}
+                    D -->|Individual| E1[个人申请]
+                    D -->|Company| E2[公司申请]
+                    D -->|Trust| E3[信托申请]
+                    
+                    E1 --> F[第二步：基本信息]
+                    E2 --> F
+                    E3 --> F
+                    
+                    F --> G[填写表单]
+                    G --> H[验证信息]
+                    H --> I{验证结果}
+                    I -->|通过| J[创建申请]
+                    I -->|失败| G
+                    
+                    J --> K[显示成功消息]
+                    K --> L[关闭浮窗]
+                    L --> M[看板更新]
+                    
+                    style A fill:#e3f2fd
+                    style B fill:#fff3e0
+                    style C fill:#e8f5e8
+                    style F fill:#e8f5e8
+                    style J fill:#c8e6c9
+                    style M fill:#c8e6c9
+            </div>
+            
+            <div class="description">
+                <h3>💡 浮窗设计特点</h3>
+                <ul>
+                    <li><strong>分步引导：</strong> 避免信息过载，逐步引导用户完成申请创建</li>
+                    <li><strong>类型选择：</strong> 支持Individual、Company、Trust三种申请类型</li>
+                    <li><strong>实时验证：</strong> 输入时即时验证格式和完整性</li>
+                    <li><strong>智能默认：</strong> 基于用户历史提供智能建议和默认值</li>
+                    <li><strong>快速反馈：</strong> 操作完成后立即更新看板状态</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram-section">
+            <h2 class="diagram-title">🤖 AI文档识别流程</h2>
+            <div class="mermaid">
+                graph TD
+                    A[用户上传文件] --> B[文件类型检测]
+                    B --> C{文件格式}
+                    C -->|PDF| D1[PDF解析]
+                    C -->|DOCX| D2[DOCX解析]
+                    C -->|Excel| D3[Excel解析]
+                    C -->|图片| D4[OCR识别]
+                    C -->|扫描件| D5[图像预处理+OCR]
+                    
+                    D1 --> E[AI信息提取]
+                    D2 --> E
+                    D3 --> E
+                    D4 --> E
+                    D5 --> E
+                    
+                    E --> F[信息分类]
+                    F --> G[生成结构化数据]
+                    G --> H[置信度评分]
+                    H --> I{置信度}
+                    I -->|高| J[自动填充表单]
+                    I -->|中| K[建议填充+人工确认]
+                    I -->|低| L[标记需要人工处理]
+                    
+                    J --> M[用户验证]
+                    K --> M
+                    L --> N[人工手动录入]
+                    
+                    M --> O[保存到系统]
+                    N --> O
+                    O --> P[更新申请状态]
+                    
+                    style A fill:#e3f2fd
+                    style E fill:#fff8e1
+                    style G fill:#e8f5e8
+                    style J fill:#c8e6c9
+                    style K fill:#fff3e0
+                    style L fill:#ffcdd2
+            </div>
+            
+            <div class="description">
+                <h3>🔍 AI识别功能说明</h3>
+                <ul>
+                    <li><strong>多格式支持：</strong> 支持PDF、DOCX、Excel、图片、扫描件等多种格式</li>
+                    <li><strong>智能识别：</strong> AI自动提取关键信息，如姓名、金额、日期等</li>
+                    <li><strong>置信度评估：</strong> 根据识别准确度提供不同的处理建议</li>
+                    <li><strong>人机协作：</strong> 高置信度自动填充，低置信度人工处理</li>
+                    <li><strong>持续学习：</strong> AI模型根据用户反馈不断优化识别准确度</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="highlight">
+            <h3>🎯 设计目标总结</h3>
+            <p><strong>HarbourX看板系统的核心目标是：</strong></p>
+            <ul>
+                <li>为Broker提供直观、高效的贷款申请管理界面</li>
+                <li>通过AI技术减少90%的手动信息录入工作</li>
+                <li>支持多种申请类型和复杂的信息结构</li>
+                <li>提供响应式设计，支持多设备访问</li>
+                <li>建立完整的设计系统，确保界面一致性和可维护性</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -2205,7 +2205,7 @@ flowchart TB
             <h2>👤 用户旅程图</h2>
             <div class="section">
                 
-                <h3>🎯 简化经纪人旅程 - 优化流程</h3>
+                <h3>🎯 贷款经纪人(broker) User Journey</h3>
                 <div class="diagram-container">
                     <div class="journey-flow">
                         <div class="flow-step">
@@ -2292,31 +2292,31 @@ flowchart TB
                         <div class="kanban-step">
                             <div class="step-icon">👤</div>
                             <h4>Leads</h4>
-                            <p>新客户询盘<br/>$16,460,001 (67个)</p>
+                            <p>新客户询盘<br/>(67个)</p>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="kanban-step">
                             <div class="step-icon">📅</div>
                             <h4>Appointment</h4>
-                            <p>预约面谈<br/>$3,616,000 (7个)</p>
+                            <p>预约面谈<br/> (7个)</p>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="kanban-step">
                             <div class="step-icon">📋</div>
                             <h4>Scenario</h4>
-                            <p>方案设计<br/>$5,410,000 (22个)</p>
+                            <p>方案设计<br/>(22个)</p>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="kanban-step">
                             <div class="step-icon">📄</div>
                             <h4>Document Collection</h4>
-                            <p>文档收集<br/>$1,640,000 (19个)</p>
+                            <p>文档收集<br/>(19个)</p>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="kanban-step">
                             <div class="step-icon">📝</div>
                             <h4>Packing Team</h4>
-                            <p>申请打包<br/>$0 (1个)</p>
+                            <p>申请打包<br/>(1个)</p>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="kanban-step">
@@ -2976,23 +2976,43 @@ flowchart TB
             
             // 重新渲染Mermaid图表当tab变为可见时
             setTimeout(function() {
-                if (typeof mermaid !== 'undefined') {
+                if (typeof mermaid !== 'undefined' && tabName === 'feature-design') {
                     try {
-                        // 清除已渲染的mermaid图表
-                        const mermaidElements = document.getElementById(tabName).querySelectorAll('.mermaid');
+                        // 获取新激活tab中的所有mermaid元素
+                        const activeTabElement = document.getElementById(tabName);
+                        const mermaidElements = activeTabElement.querySelectorAll('.mermaid');
+                        
                         mermaidElements.forEach(function(element) {
+                            // 检查是否已经渲染过
                             if (element.getAttribute('data-processed') === 'true') {
+                                // 清除之前的渲染结果
                                 element.removeAttribute('data-processed');
-                                element.innerHTML = element.textContent;
+                                // 恢复原始文本内容
+                                const originalText = element.getAttribute('data-original-text');
+                                if (originalText) {
+                                    element.innerHTML = originalText;
+                                } else {
+                                    // 如果没有保存原始文本，使用当前textContent
+                                    const textContent = element.textContent || element.innerText;
+                                    element.innerHTML = textContent;
+                                }
+                            } else {
+                                // 第一次渲染，保存原始文本
+                                const originalText = element.textContent || element.innerText;
+                                element.setAttribute('data-original-text', originalText);
                             }
                         });
-                        // 重新初始化
-                        mermaid.init(undefined, mermaidElements);
+                        
+                        // 重新初始化mermaid图表
+                        if (mermaidElements.length > 0) {
+                            mermaid.init(undefined, mermaidElements);
+                            console.log('Mermaid图表重新渲染完成，共' + mermaidElements.length + '个图表');
+                        }
                     } catch (e) {
-                        console.log('Mermaid reinitialization attempted:', e);
+                        console.error('Mermaid重新渲染失败:', e);
                     }
                 }
-            }, 100);
+            }, 200);
         }
 
         mermaid.initialize({ 
@@ -3041,12 +3061,18 @@ flowchart TB
                         if (activeTab) {
                             const mermaidElements = activeTab.querySelectorAll('.mermaid');
                             if (mermaidElements.length > 0) {
+                                // 为初始加载的图表保存原始文本
+                                mermaidElements.forEach(function(element) {
+                                    const originalText = element.textContent || element.innerText;
+                                    element.setAttribute('data-original-text', originalText);
+                                });
+                                
                                 mermaid.init(undefined, mermaidElements);
-                                console.log('当前可见Mermaid图表初始化完成');
+                                console.log('当前可见Mermaid图表初始化完成，共' + mermaidElements.length + '个图表');
                             }
                         }
                     } catch (e) {
-                        console.log('Mermaid初始化尝试:', e);
+                        console.error('Mermaid初始化失败:', e);
                     }
                 }
             }, 300);
